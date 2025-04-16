@@ -95,3 +95,23 @@ class CLBaseDataset(Dataset):
                 replace=False,
             )
             self.targets.append(torch.tensor(cl, dtype=self.true_targets.dtype))
+
+    def gen_partial_target_uniform(self, partial_rate: float = 0.1):
+        """
+        Generate partial labels for each data. The partial labels are uniformly sampled from the true labels.
+        """
+        if getattr(self, "true_targets", None) == None:
+            self.true_targets = copy.deepcopy(self.targets)
+        self.targets = []
+        for i in range(len(self.true_targets)):
+            # Start with the true target as part of the partial labels
+            cl = [self.true_targets[i].item()]
+            
+            # Iterate over all other classes
+            for c in range(self.num_classes):
+                if c != self.true_targets[i].item():  # Exclude the true target
+                    if np.random.rand() < partial_rate:  # Add class with probability = partial_rate
+                        cl.append(c)
+            
+            # Convert the list to a numpy array and append it as a tensor
+            self.targets.append(torch.tensor(cl, dtype=self.true_targets.dtype))

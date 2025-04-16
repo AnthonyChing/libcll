@@ -10,6 +10,7 @@ from .cl_kmnist import CLKMNIST
 from .cl_mnist import CLMNIST
 from .cl_micro_imagenet10 import CLMicro_ImageNet10
 from .cl_micro_imagenet20 import CLMicro_ImageNet20
+from .pl_cifar10 import PLCIFAR10
 
 D_LIST = {
     "mnist": CLMNIST, 
@@ -27,6 +28,7 @@ D_LIST = {
     "clcifar20": CLCIFAR20, 
     "clmicro_imagenet10": CLMicro_ImageNet10, 
     "clmicro_imagenet20": CLMicro_ImageNet20, 
+    "plcifar10": PLCIFAR10, 
 }
 
 def prepare_cl_data_module(
