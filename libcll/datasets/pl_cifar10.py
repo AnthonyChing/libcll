@@ -102,7 +102,7 @@ class PLCIFAR10(torchvision.datasets.CIFAR10, CLBaseDataset):
                 transform=train_transform,
                 num_cl=num_cl, 
             )
-            dataset.gen_partial_target_uniform()
+            dataset.gen_partial_target_uniform(noise=noise)
         else:
             test_transform = transforms.Compose(
                 [
