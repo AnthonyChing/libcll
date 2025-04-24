@@ -1,7 +1,7 @@
 python scripts/train.py \
   --do_train \
   --do_predict \
-  --strategy MCL \
+  --strategy FWD \
   --type EXP \
   --model ResNet18 \
   --dataset plcifar10 \
@@ -9,7 +9,8 @@ python scripts/train.py \
   --batch_size 256 \
   --valid_type Accuracy \
   --output_dir output \
-  --noise 0
+  --noise 1
 
+export CUDA_VISIBLE_DEVICES=0
 
 tensorboard --logdir=output/lightning_logs/ --bind_all
